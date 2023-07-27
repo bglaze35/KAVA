@@ -1,6 +1,7 @@
 import time
 import requests
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 
 URL = "https://investorlift.com"  # Replace this with the actual URL of the website to scrape
@@ -28,8 +29,7 @@ def scrape_website(driver):
         property_items = soup.find_all("div", class_=DIV_CLASS_TO_CAPTURE)
 
         for item in property_items:
-            # Data extraction code remains the same as before
-
+            # Data extraction code
             property_url = item.find("a")["href"]
             image_source = item.find("img")["src"]
             price_element = item.find("span", class_="listing-price")
@@ -88,8 +88,11 @@ if __name__ == "__main__":
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
-    # Initialize ChromeDriver with the specified path and options
-    driver = webdriver.Chrome(executable_path=chrome_driver_path, options=options)
+    # Initialize the ChromeDriver service with the specified path
+    service = Service(executable_path=chrome_driver_path)
+
+    # Initialize ChromeDriver with the service and options
+    driver = webdriver.Chrome(service=service, options=options)
 
     try:
         while True:
