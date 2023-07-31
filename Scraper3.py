@@ -1,5 +1,7 @@
 import time
 import requests
+from selenium import webdriver  # Add this import for the webdriver
+from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import re
 import subprocess  # Add this import for running xvfb-run
