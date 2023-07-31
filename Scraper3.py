@@ -133,10 +133,12 @@ def scrape_website(driver, previous_property_urls):
 if __name__ == "__main__":
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run Chrome in headless mode (no GUI)
-
+    options.add_argument("--no-sandbox")  # Add this option to fix DevToolsActivePort issue
+    options.add_argument("--disable-dev-shm-usage")  # Add this option to fix DevToolsActivePort issue
+    
     # Initialize ChromeDriver without the executable_path argument
     driver = webdriver.Chrome(options=options)
-
+    
     previous_property_urls = []  # Initialize the list to store previously scraped property URLs
     try:
         while True:
